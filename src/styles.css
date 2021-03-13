@@ -7,6 +7,7 @@
     opacity: 1;
     transition: background-color .3s;
 }
+
 .custom .p-scrollpanel-bar {
     height: 5px;    
 }
@@ -21,3 +22,69 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .boolean { color: blue; }
 .null { color: magenta; }
 .key { color: red; }
+
+textarea{
+    height: 100%;
+    width: 100%;
+    background-color: none;
+}
+
+:enabled{
+    box-shadow: none !important;
+}
+:focus{
+    box-shadow: none !important;
+    outline: none;
+}
+
+.p-splitter-gutter{
+    background: black !important;
+    width: 2px !important;
+}
+
+.p-splitter-gutter-handle{
+    background: red !important;
+}
+
+.focus-visible{
+    outline: none !important;
+}
+
+.dropdown-verb{
+    border-right: 1px solid black;
+    width: 15%;
+    height: 100%;
+}
+
+.input-verb{
+    width: 75%;
+    border: none;
+    color: black;
+    font-weight: 800;
+    font-size: 18px;
+    background: white;
+    height: 100%;
+}
+
+.button-verb{
+    width: 10%  !important;
+    border: none;
+    cursor: pointer;
+    color: black;
+    font-weight: 800;
+    font-size: 18px;
+    background: white;
+    height: 100%;
+}
+
+.none-bruber +  .p-splitter-gutter{
+    display: none;
+}
+
+.none-bruber{
+    flex-basis: 10% !important;
+}
+
+.none-bruber ~ .p-splitter-panel{
+    flex-basis: 90% !important;
+}
