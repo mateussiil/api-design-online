@@ -25,7 +25,7 @@ const verbs = [
 function App() {
   const [url, setUrl] = useState("")
   const [verb, setVerb] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("http://localhost:3336/infornota/estados");
 
   return (
     <div style={{ overflowY: 'hidden',height: '100vh'}} className="App">
@@ -43,10 +43,33 @@ function App() {
                 fetch(`${url}`, { method: verb })
                   .then(response => response.text())
                   .then(texto => {
-                    setMessage(texto)
-                    console.log(texto)
+                    const element = document.getElementById("custom")
+                    element!.appendChild(document.createElement('pre')).innerHTML = syntaxHighlight(JSON.stringify(JSON.parse(texto), undefined, 4));
                   })
-                  .catch(err => console.log(err.message))
+                  .catch(err => {
+
+                    setMessage(JSON.stringify({Message:err.message}))
+                    document.getElementById("pre")
+                  })
+
+                  function syntaxHighlight(json:string) {
+                    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match:any) {
+                        var cls = 'number';
+                        if (/^"/.test(match)) {
+                            if (/:$/.test(match)) {
+                                cls = 'key';
+                            } else {
+                                cls = 'string';
+                            }
+                        } else if (/true|false/.test(match)) {
+                            cls = 'boolean';
+                        } else if (/null/.test(match)) {
+                            cls = 'null';
+                        }
+                        return '<span class="' + cls + '">' + match + '</span>';
+                    });
+                }
               }} />
             </SplitterPanel>
             <SplitterPanel size={85}>
@@ -55,8 +78,8 @@ function App() {
                   Panel 3
                     </SplitterPanel>
                 <SplitterPanel className="p-d-flex p-ai-center p-jc-center" size={80}>
-                  <ScrollPanel style={{width: '100%', height: '90vh'}} className="custom" >
-                    {message}
+                  <ScrollPanel style={{color: 'green',width: '100%', height: '90vh'}} className="custom" >
+                  <div id="custom"></div>
                   </ScrollPanel>
                 </SplitterPanel>
               </Splitter>
