@@ -1,0 +1,17 @@
+.custom .p-scrollpanel-wrapper {
+    border-right: 9px solid #f4f4f4;
+}
+
+.custom .p-scrollpanel-bar {
+    background-color: #1976d2 !important;
+    opacity: 1;
+    transition: background-color .3s;
+}
+.custom .p-scrollpanel-bar {
+    height: 5px;    
+}
+
+.custom .p-scrollpanel-bar:hover {
+    background-color: #135ba1;
+}
+ 
